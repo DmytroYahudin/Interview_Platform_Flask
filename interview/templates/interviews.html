@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+
+{% block title %}Index{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <div class="btn-group pull-right header-btn-group" role="group" aria-label="...">
+        <a href="{{ url_for('main.add_interview') }}" type="button" class="btn btn-default">Create Interview</a>
+    </div>
+    <h1>List of Interviews</h1>
+</div>
+<div>
+    <ul class="list-group">
+    {% for i in interviews_list %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <p1>{{ i.candidate.first_name }} {{ i.candidate.last_name }}</p1>
+        {% for q in i.interviewer %}
+        <p2><i>Interviewers: {{ q }}</i></p2>
+        {% endfor %}
+
+
+            <div class="pull-right">
+            <a href="{{ url_for('main.start_interview', id=i.id) }}" type="button" class="btn btn-default">Start Interview</a>
+            </div>
+
+
+    {#<span href="{{ url_for('main.start_interview', id=i.id) }}" class="badge badge-primary badge-pill">{{ i.candidate.email }}</span>#}
+    </li>
+    {% endfor %}
+    </ul>
+
+
+
+
+</div>
+{% endblock %}

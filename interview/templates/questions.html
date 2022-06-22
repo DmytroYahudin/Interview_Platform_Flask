@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block title %}Question{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <div class="btn-group pull-right header-btn-group" role="group" aria-label="...">
+        <a href="{{ url_for('main.add_question') }}" type="button" class="btn btn-default">Add Question</a>
+    </div>
+    <h1>List of questions about Python</h1>
+</div>
+<div>
+    <ul class="list-group">
+    {% for q in questions %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ q.question_text }}
+    <span class="badge badge-primary badge-pill">{{ q.weight }}</span>
+    </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

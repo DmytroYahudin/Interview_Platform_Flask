@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block title %}Index{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <div class="btn-group pull-right header-btn-group" role="group" aria-label="...">
+        <a href="{{ url_for('main.add_interview') }}" type="button" class="btn btn-default">Create Interview</a>
+    </div>
+    <h1>Answers</h1>
+</div>
+<div>
+    <form class="form form-horizontal" method="post" role="form">
+    {{ form.hidden_tag() }}
+    {{ wtf.form_errors(form, hiddens="only") }}
+
+    <div class="container-fluid">
+
+
+
+        <div class="col-sm-8">
+            {% for question in questions %}
+            <ul class="list-group">
+                <li class="list-group-item" style="height: 50px">
+                    <div style="display: flex; vertical-align:middle; justify-content: flex-start">{{ question.question_text }} - {{ question.weight }}</div>
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+
+
+        <div class="col-sm-4">
+            {% for field in form.mark_set %}
+            <ul class="list-group">
+                <li class="list-group-item" style="height: 50px">
+                    <div style="display: flex; vertical-align:middle; justify-content: flex-end">{{ render_field(field) }}</div>
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+
+{#
+
+        <ul class="list-group">
+        {% for field in form.mark_set %}
+        {% for question in questions %}
+
+        <li class="list-group-item">
+        <div style="display: flex; vertical-align:middle; justify-content: flex-end">{{ render_field(field) }}</div>
+        <div style="display: flex; vertical-align:middle; justify-content: flex-start">{{ question.question_text }} - {{ question.weight }}</div>
+
+        </li>
+        {% endfor %}
+        {% endfor %}
+        </ul>
+
+#}
+
+
+
+    {{ wtf.form_field(form.submit) }}
+</form>
+</div>
+{% endblock %}
