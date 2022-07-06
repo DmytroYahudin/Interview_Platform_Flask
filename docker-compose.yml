@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  web:
+    build:
+      context: .
+    command: bash -c "flask create-recruiter recruiter && flask run --host 0.0.0.0"
+    ports:
+      - 5000:5000
+    environment:
+      - FLASK_CONFIG=production
+    working_dir: /app
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=flask_interview
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres_data:
