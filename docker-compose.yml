@@ -9,7 +9,6 @@ services:
       - 5000:5000
     environment:
       - FLASK_CONFIG=production
-    working_dir: /app
     volumes:
       - ./:/app
     depends_on:
