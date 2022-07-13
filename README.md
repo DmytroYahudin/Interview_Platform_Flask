@@ -40,7 +40,7 @@ After you logged in as a "recruiter" you can create the "interviewer" user and l
 
 ## ERD
 
-![ERD for Flask Interview platform](ERD flask_interview.png)
+![ERD for Flask Interview platform](ERD_flask_interview.png)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
