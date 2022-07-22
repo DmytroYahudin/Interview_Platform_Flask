@@ -1,11 +1,12 @@
 import os
-import click
-from interview import create_app, db
 
-from interview.models import User, Role, Interview, Question, Answer
+import click
 from flask_migrate import Migrate
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+from interview import create_app, db
+from interview.models import Answer, Interview, Question, Role, User
+
+app = create_app(os.getenv("FLASK_CONFIG") or "default")
 migrate = Migrate(app, db)
 
 
@@ -16,16 +17,18 @@ def create_recruiter(name):
     recruiter = Role(role_name=name)
     db.session.add(recruiter)
     db.session.commit()
-    user = User(email='recr@r.com', username=name, password='123', role=recruiter)
+    user = User(email="recr@r.com", username=name, password="123", role=recruiter)
     db.session.add(user)
     db.session.commit()
 
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db,
-                User=User,
-                Role=Role,
-                Interview=Interview,
-                Question=Question,
-                Answer=Answer)
+    return dict(
+        db=db,
+        User=User,
+        Role=Role,
+        Interview=Interview,
+        Question=Question,
+        Answer=Answer,
+    )
